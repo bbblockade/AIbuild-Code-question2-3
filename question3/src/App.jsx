@@ -3,6 +3,8 @@ import { Button, TreeSelect } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoriesStart } from './store/categorySlice';
 import { useState } from 'react';
+import { useFetchCategories } from './hooks/useFetchCategories';
+
 
 function transformToTreeData(node) {
   return {
@@ -14,6 +16,7 @@ function transformToTreeData(node) {
 }
 
 function App() {
+  const fetchViaHook = useFetchCategories();
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
   const [selectedId, setSelectedId] = useState(null);
@@ -28,18 +31,34 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: 600, margin: '0 auto' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',           // Full height of the viewport
+        backgroundColor: '#f9f9f9',   // Optional background color
+      }}
+>
+      <div
+        style={{
+          padding: '2rem',
+          maxWidth: '600px',
+          width: '100%',
+          textAlign: 'center',         // Center text and inner content
+        }}
+  >
       <h2>Category TreeSelect</h2>
 
-      <Button onClick={handleFetchWithSaga} type="primary" style={{ marginBottom: 16 }}>
+      <Button onClick={handleFetchWithSaga} type="primary" style={{ marginBottom: 16, width: '400px' }}>
         Fetch via Redux-Saga
       </Button>
 
       <br />
 
       {/* Placeholder for Hook-based Button */}
-      <Button disabled style={{ marginBottom: 16 }}>
-        Fetch via Custom Hook (coming next)
+      <Button onClick={fetchViaHook} style={{ marginBottom: 16 ,width: '400px'}}>
+        Fetch via Custom Hook
       </Button>
 
       <br />
@@ -52,8 +71,10 @@ function App() {
           placeholder="Please select a category"
           treeDefaultExpandAll
           onChange={handleSelect}
+          popupMatchSelectWidth={false}
         />
       )}
+      </div>
     </div>
   );
 }
