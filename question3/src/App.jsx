@@ -37,7 +37,6 @@ function App() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',           // Full height of the viewport
-        backgroundColor: '#f9f9f9',   // Optional background color
       }}
 >
       <div
@@ -50,14 +49,14 @@ function App() {
   >
       <h2>Category TreeSelect</h2>
 
-      <Button onClick={handleFetchWithSaga} type="primary" style={{ marginBottom: 16, width: '400px' }}>
+      <Button onClick={handleFetchWithSaga} type="primary" style={{ marginBottom: 16, width: '800px' }}>
         Fetch via Redux-Saga
       </Button>
 
       <br />
 
       {/* Placeholder for Hook-based Button */}
-      <Button onClick={fetchViaHook} style={{ marginBottom: 16 ,width: '400px'}}>
+      <Button onClick={fetchViaHook} style={{ marginBottom: 16 ,width: '800px'}}>
         Fetch via Custom Hook
       </Button>
 
@@ -65,13 +64,13 @@ function App() {
 
       {categoryState.data && (
         <TreeSelect
-          style={{ width: '100%' }}
+          style={{ width: '800px' }}
           value={selectedId}
           treeData={[transformToTreeData(categoryState.data)]}
           placeholder="Please select a category"
           treeDefaultExpandAll
           onChange={handleSelect}
-          popupMatchSelectWidth={false}
+          popupMatchSelectWidth={true}
         />
       )}
       </div>
